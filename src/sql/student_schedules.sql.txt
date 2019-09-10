@@ -28,8 +28,8 @@ INNER JOIN Terms t
 INNER JOIN Terms yr
    ON t.YearId*100 = yr.Id
   AND yr.SchoolId = 0
-  AND yr.FirstDay <= SYSTIMESTAMP
-  AND yr.LastDay >= SYSTIMESTAMP
+  AND yr.FirstDay <=  (SELECT SYSTIMESTAMP FROM DUAL)
+  AND yr.LastDay >=  (SELECT SYSTIMESTAMP FROM DUAL)
   AND yr.IsyearRec = 1
   AND MOD(yr.ID, 100) = 0
 

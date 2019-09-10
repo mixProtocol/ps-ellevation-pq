@@ -30,6 +30,7 @@ INNER JOIN users u
   ON ss.Users_DCID = u.DCID
 
 WHERE ss.Status = 1
+  AND LOWER(TRIM(u.Email_Addr)) LIKE '%@watertown.k12.ma.us'
   AND u.TeacherNumber IS NOT NULL
   AND u.Email_Addr IS NOT NULL
   AND u.First_Name IS NOT NULL
