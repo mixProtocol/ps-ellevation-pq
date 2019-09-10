@@ -1,4 +1,46 @@
 <queries>
+  <query name="com.gpsmxp.ellevation.exports.staff_roster" coreTable="Users" flattened="false" tags="mxp">
+    <summary>WPS ELLevation Staff Roster</summary>
+    <description>WPS ELLevation Staff Roster</description>
+    <columns>
+      <column column="Users.TeacherNumber">TeacherNumber</column>
+      <column column="Users.Email_Addr">Email_Addr</column>
+      <column column="Users.First_Name">First_Name</column>
+      <column column="Users.Last_Name">Last_Name</column>
+      <column column="Users.TeacherNumber">SchoolID</column>
+      <column column="Users.TeacherNumber">SchoolNamePlaceHolder</column>
+      <column column="Users.TeacherNumber">RolePlaceHolder</column>
+      <column column="Users.TeacherNumber">State_StudentNumber</column>
+      <column column="Users.TeacherNumber">GroupPlaceHolder</column>
+    </columns>
+    <sql>
+	    <![CDATA[				
+SELECT
+  u.TeacherNumber AS TeacherNumber, 
+  LOWER(TRIM(u.Email_Addr)) AS Email_Addr, 
+  u.First_Name AS First_Name, 
+  u.Last_Name AS Last_Name,
+  ss.SchoolID AS SchoolID,
+  TO_CHAR('') AS SchoolNamePlaceHolder,
+  TO_CHAR('') AS RolePlaceHolder,
+  TO_CHAR('') AS GroupPlaceHolder
+
+FROM SchoolStaff ss
+
+INNER JOIN users u
+  ON ss.Users_DCID = u.DCID
+
+WHERE ss.Status = 1
+  AND u.TeacherNumber IS NOT NULL
+  AND u.Email_Addr IS NOT NULL
+  AND u.First_Name IS NOT NULL
+  AND u.Last_Name IS NOT NULL
+  AND ss.SchoolID > 0
+
+ORDER BY u.Last_Name, u.First_Name, ss.SchoolID
+		  ]]>
+    </sql>
+  </query>	
   <query name="com.gpsmxp.ellevation.exports.student_demographics" coreTable="students" flattened="false" tags="mxp">
     <summary>WPS ELLevation Student Demographics</summary>
     <description>WPS ELLevation Student Demographics</description>

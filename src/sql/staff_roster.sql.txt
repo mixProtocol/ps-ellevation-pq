@@ -1,6 +1,6 @@
 SELECT
   u.TeacherNumber AS TeacherNumber, 
-  u.Email_Addr AS Email_Addr, 
+  LOWERL(TRIM(u.Email_Addr)) AS Email_Addr, 
   u.First_Name AS First_Name, 
   u.Last_Name AS Last_Name,
   ss.SchoolID AS SchoolID,
