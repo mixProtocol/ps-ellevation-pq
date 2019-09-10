@@ -1,0 +1,37 @@
+SELECT
+  s.Student_Number AS Student_Number,
+  s.State_StudentNumber AS State_StudentNumber, 
+  u.TeacherNumber AS TeacherNumber,
+  u.LastFirst AS LastFirst, 
+  c.Course_Name AS Course_Name,
+  cc.Course_Number AS Course_Number,
+  cc.Section_Number AS Section_Number,
+  c.CreditType AS CreditType,
+  cc.TermId AS TermId,
+  cc.SchoolId AS SchoolId
+
+FROM CC cc
+
+JOIN Students s
+  ON cc.StudentID=s.ID
+JOIN Courses c
+  ON  UPPER(cc.Course_Number) = UPPER(c.Course_Number)
+JOIN SchoolStaff ss
+  ON cc.TeacherID = ss.ID
+JOIN Users u
+  ON u.DCID = ss.Users_DCID
+INNER JOIN Sections sct 
+   ON cc.SectionId = sct.Id
+INNER JOIN Terms t 
+   ON sct.TermId = t.Id
+  AND sct.SchoolId = t.SchoolId
+INNER JOIN Terms yr
+   ON t.YearId*100 = yr.Id
+  AND yr.SchoolId = 0
+  AND yr.FirstDay <= SYSTIMESTAMP
+  AND yr.LastDay >= SYSTIMESTAMP
+  AND yr.IsyearRec = 1
+  AND MOD(yr.ID, 100) = 0
+
+ORDER BY s.Enroll_Status, s.Grade_Level, s.SchoolId, s.Student_Number,
+         cc.TermId, cc.Course_Number, cc.Section_Number

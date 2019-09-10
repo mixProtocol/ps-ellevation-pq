@@ -1,0 +1,23 @@
+SELECT
+  u.TeacherNumber AS TeacherNumber, 
+  u.Email_Addr AS Email_Addr, 
+  u.First_Name AS First_Name, 
+  u.Last_Name AS Last_Name,
+  ss.SchoolID AS SchoolID,
+  TO_CHAR('') AS SchoolNamePlaceHolder,
+  TO_CHAR('') AS RolePlaceHolder,
+  TO_CHAR('') AS GroupPlaceHolder
+
+FROM SchoolStaff ss
+
+INNER JOIN users u
+  ON ss.Users_DCID = u.DCID
+
+WHERE ss.Status = 1
+  AND u.TeacherNumber IS NOT NULL
+  AND u.Email_Addr IS NOT NULL
+  AND u.First_Name IS NOT NULL
+  AND u.Last_Name IS NOT NULL
+  AND ss.SchoolID > 0
+
+ORDER BY u.Last_Name, u.First_Name, ss.SchoolID

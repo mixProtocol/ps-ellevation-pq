@@ -1,0 +1,76 @@
+<queries>
+  <query name="com.gpsmxp.ellevation.exports.student_demographics" coreTable="students" flattened="false" tags="mxp">
+    <summary>WPS ELLevation Student Demographics</summary>
+    <description>WPS ELLevation Student Demographics</description>
+    <columns>
+      <column column="Students.Dcid">Dcid</column>
+      <column column="Students.First_Name">First_Name</column>
+      <column column="Students.Middle_Name">Middle_Name</column>
+      <column column="Students.Last_Name">Last_Name</column>
+      <column column="Students.Enroll_Status">Enroll_Status</column>
+      <column column="Students.SchoolId">SchoolId</column>
+      <column column="Students.Student_Number">Student_Number</column>
+      <column column="Students.State_StudentNumber">State_StudentNumber</column>
+      <column column="Students.Grade_Level">Grade_Level</column>
+      <column column="Students.Gender">Gender</column>
+      <column column="Students.Dob">DOB</column>
+      <column column="Students.Street">Street</column>
+      <column column="Students.City">City</column>
+      <column column="Students.State">State</column>
+      <column column="Students.Zip">Zip</column>
+      <column column="Students.Student_Number">BirthCity</column>
+      <column column="Students.Student_Number">CountryOfOrigin</column>
+      <column column="Students.Student_Number">NativeLanguage</column>
+      <column column="Students.FedEthnicity">FedEthnicity</column>
+      <column column="Students.Student_Number">EthnicityRaceCode</column>
+      <column column="Students.Student_Number">LepProgramStatus</column>
+      <column column="Students.Student_Number">LimitedEnglishProficiency</column>
+      <column column="Students.Student_Number">Lep1stYrInUs</column>
+      <column column="Students.Student_Number">ImmigrantStatus</column>
+      <column column="Students.Student_Number">LEP_EntryDate</column>
+      <column column="Students.Student_Number">LEP_ExitDate</column>
+    </columns>
+    <sql>
+	    <![CDATA[				
+SELECT
+  s.Dcid AS Dcid,
+  s.First_Name AS First_Name,
+  s.Middle_Name AS Middle_Name,
+  s.Last_Name AS Last_Name,
+  s.Enroll_Status AS Enroll_Status,
+  s.SchoolId AS SchoolId,
+  s.Student_Number AS Student_Number,
+  s.State_StudentNumber AS State_StudentNumber,
+  s.Grade_Level AS Grade_Level,
+  s.Gender AS Gender,
+  s.DOB AS DOB,
+  s.Street AS Street,
+  s.City AS City,
+  s.State AS State,
+  s.Zip AS Zip,
+  msdx.BirthCity AS BirthCity,
+  msdx.CountryOfOrigin AS CountryOfOrigin,
+  msdx.NativeLanguage AS NativeLanguage,
+  s.FedEthnicity AS FedEthnicity,
+  msdx.EthnicityRaceCode AS EthnicityRaceCode,
+  msdx.LepProgramStatus AS LepProgramStatus,
+  msdx.LimitedEnglishProficiency AS LimitedEnglishProficiency,
+  msdx.Lep1stYrInUs AS Lep1stYrInUs,
+  msdx.ImmigrantStatus AS ImmigrantStatus,
+  udes.LEP_EntryDate AS LEP_EntryDate,
+  udes.LEP_ExitDate AS LEP_ExitDate
+
+FROM Students s
+
+LEFT OUTER JOIN S_MA_Stu_Demographic_X msdx 
+  ON s.Dcid = msdx.StudentsDcid
+
+LEFT OUTER JOIN U_Def_Ext_Students udes
+  ON s.Dcid = udes.StudentsDcid
+
+ORDER BY s.Enroll_Status, s.Grade_Level, 
+  s.SchoolId, s.Student_Number
+		  ]]>
+    </sql>
+  </query>	
+</queries>

@@ -1,0 +1,95 @@
+<ReportName>ELLevation Student Schedules</ReportName>
+<ReportTitle>ELLevation Student Schedules</ReportTitle>
+<AfterTitle></AfterTitle>
+<ReportGroup>Application Exports</ReportGroup>
+<ReportDescription></ReportDescription>
+<SQLQuery><textarea name="UF-0060051056">SELECT s.Student_Number, s.State_StudentNumber, 
+  u.TeacherNumber, u.LastFirst, 
+  c.Course_Name, cc.Course_Number, cc.Section_Number,c.CreditType,
+  cc.TermId, cc.SchoolId
+
+FROM CC cc
+
+JOIN Students s
+  ON cc.StudentID=s.ID
+JOIN Courses c
+  ON  UPPER(cc.Course_Number) = UPPER(c.Course_Number)
+JOIN SchoolStaff ss
+  ON cc.TeacherID = ss.ID
+JOIN Users u
+  ON u.DCID = ss.Users_DCID
+INNER JOIN Sections sct 
+   ON cc.SectionId = sct.Id
+INNER JOIN Terms t 
+   ON sct.TermId = t.Id
+  AND sct.SchoolId = t.SchoolId
+INNER JOIN Terms yr
+   ON t.YearId*100 = yr.Id
+  AND yr.SchoolId = 0
+      AND yr.FirstDay &lt;= SYSTIMESTAMP
+      AND yr.LastDay &gt;= SYSTIMESTAMP
+      AND yr.IsyearRec = 1
+      AND MOD(yr.ID, 100) = 0
+
+ORDER BY s.Enroll_Status, s.Grade_Level, 
+  s.SchoolId, s.Student_Number,
+  cc.TermId, cc.Course_Number, cc.Section_Number</textarea></SQLQuery>
+<ReportHeader><th>Student_Number</th><th>State_StudentNumber</th><th>TeacherNumber</th><th>LastFirst</th><th>Course_Name</th><th>Course_Number</th><th>Section_Number</th><th>CreditType</th><th>TermID</th><th>SchoolId</th></ReportHeader>
+<CreateStudentSelection>0</CreateStudentSelection>
+<StudentSelectionQuery></StudentSelectionQuery>
+<CreateStudentSelectionB></CreateStudentSelectionB>
+<IncludeRowNumber>0</IncludeRowNumber>
+<OpeninNewWindow>0</OpeninNewWindow>
+<HideCopyButton></HideCopyButton>
+<HideCSVButton></HideCSVButton>
+<HideTabButton></HideTabButton>
+<HidePDFButton></HidePDFButton>
+<ShowSearchBox></ShowSearchBox>
+<ShowResultsInfo></ShowResultsInfo>
+<ParameterName1></ParameterName1>
+<ParameterVal1></ParameterVal1>
+<ParameterCal1></ParameterCal1>
+<ParameterOpt1></ParameterOpt1>
+<ParameterName2></ParameterName2>
+<ParameterVal2></ParameterVal2>
+<ParameterCal2></ParameterCal2>
+<ParameterOpt2></ParameterOpt2>
+<ParameterName3></ParameterName3>
+<ParameterVal3></ParameterVal3>
+<ParameterCal3></ParameterCal3>
+<ParameterOpt3></ParameterOpt3>
+<ParameterName4></ParameterName4>
+<ParameterVal4></ParameterVal4>
+<ParameterCal4></ParameterCal4>
+<ParameterOpt4></ParameterOpt4>
+<ParameterName5></ParameterName5>
+<ParameterVal5></ParameterVal5>
+<ParameterCal5></ParameterCal5>
+<ParameterOpt5></ParameterOpt5>
+<PdfOrientation></PdfOrientation>
+<NoCSVQuotes></NoCSVQuotes>
+<NoRowSel></NoRowSel>
+<ShowSHC></ShowSHC>
+<UseColRe></UseColRe>
+<UseFixHdr></UseFixHdr>
+<HidePrint></HidePrint>
+<ReportNotes></ReportNotes>
+<UseColFilt></UseColFilt>
+<UseRowGroups></UseRowGroups>
+<UseRowGroupsOptions>Opt1</UseRowGroupsOptions>
+<DisplayRowGroupsCol></DisplayRowGroupsCol>
+<UseRowGroupsCounts></UseRowGroupsCounts>
+<sqlChartsReport></sqlChartsReport>
+<InitialsqlChart></InitialsqlChart>
+<InitialChartName></InitialChartName>
+<RowGroupsDesc></RowGroupsDesc>
+<sqlExportsReport>1</sqlExportsReport>
+<FLSMapField></FLSMapField>
+<ExcFrmList></ExcFrmList>
+<ExecGrp>9,</ExecGrp>
+<ValueLi3>0</ValueLi3>
+<NoHeaderRow></NoHeaderRow>
+<ReportDirections></ReportDirections>
+<HideParams></HideParams>
+<ShowGridlines></ShowGridlines>
+<sqlReportsQ></sqlReportsQ>

@@ -1,0 +1,38 @@
+SELECT
+  s.Dcid AS Dcid,
+  s.First_Name AS First_Name,
+  s.Middle_Name AS Middle_Name,
+  s.Last_Name AS Last_Name,
+  s.Enroll_Status AS Enroll_Status,
+  s.SchoolId AS SchoolId,
+  s.Student_Number AS Student_Number,
+  s.State_StudentNumber AS State_StudentNumber,
+  s.Grade_Level AS Grade_Level,
+  s.Gender AS Gender,
+  s.DOB AS DOB,
+  s.Street AS Street,
+  s.City AS City,
+  s.State AS State,
+  s.Zip AS Zip,
+  msdx.BirthCity AS BirthCity,
+  msdx.CountryOfOrigin AS CountryOfOrigin,
+  msdx.NativeLanguage AS NativeLanguage,
+  s.FedEthnicity AS FedEthnicity,
+  msdx.EthnicityRaceCode AS EthnicityRaceCode,
+  msdx.LepProgramStatus AS LepProgramStatus,
+  msdx.LimitedEnglishProficiency AS LimitedEnglishProficiency,
+  msdx.Lep1stYrInUs AS Lep1stYrInUs,
+  msdx.ImmigrantStatus AS ImmigrantStatus,
+  udes.LEP_EntryDate AS LEP_EntryDate,
+  udes.LEP_ExitDate AS LEP_ExitDate
+
+FROM Students s
+
+LEFT OUTER JOIN S_MA_Stu_Demographic_X msdx 
+  ON s.Dcid = msdx.StudentsDcid
+
+LEFT OUTER JOIN U_Def_Ext_Students udes
+  ON s.Dcid = udes.StudentsDcid
+
+ORDER BY s.Enroll_Status, s.Grade_Level, 
+  s.SchoolId, s.Student_Number
