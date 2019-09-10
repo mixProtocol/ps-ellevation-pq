@@ -10,7 +10,6 @@
       <column column="Users.TeacherNumber">SchoolID</column>
       <column column="Users.TeacherNumber">SchoolNamePlaceHolder</column>
       <column column="Users.TeacherNumber">RolePlaceHolder</column>
-      <column column="Users.TeacherNumber">State_StudentNumber</column>
       <column column="Users.TeacherNumber">GroupPlaceHolder</column>
     </columns>
     <sql>
@@ -114,5 +113,62 @@ ORDER BY s.Enroll_Status, s.Grade_Level,
   s.SchoolId, s.Student_Number
 		  ]]>
     </sql>
-  </query>	
+  </query>
+  <query name="com.gpsmxp.ellevation.exports.student_schedules" coreTable="CC" flattened="false" tags="mxp">
+    <summary>WPS ELLevation Student Schedules</summary>
+    <description>WPS ELLevation Student Schedules</description>
+    <columns>
+      <column column="cc.StudentID">Student_Number</column>
+      <column column="cc.StudentID">State_StudentNumber</column>
+      <column column="cc.TeacherID">TeacherNumber</column>
+      <column column="cc.TeacherID">LastFirst</column>
+      <column column="cc.Course_Number">Course_Name</column>
+      <column column="cc.Course_Number">Course_Number</column>
+      <column column="cc.Section_Number">Section_Number</column>
+      <column column="cc.Course_Number">CreditType</column>
+      <column column="cc.TermId">TermId</column>
+      <column column="cc.SchoolId">SchoolId</column>
+    </columns>
+    <sql>
+	    <![CDATA[				
+SELECT
+  s.Student_Number AS Student_Number,
+  s.State_StudentNumber AS State_StudentNumber, 
+  u.TeacherNumber AS TeacherNumber,
+  u.LastFirst AS LastFirst, 
+  c.Course_Name AS Course_Name,
+  cc.Course_Number AS Course_Number,
+  cc.Section_Number AS Section_Number,
+  c.CreditType AS CreditType,
+  cc.TermId AS TermId,
+  cc.SchoolId AS SchoolId
+
+FROM CC cc
+
+JOIN Students s
+  ON cc.StudentID=s.ID
+JOIN Courses c
+  ON  UPPER(cc.Course_Number) = UPPER(c.Course_Number)
+JOIN SchoolStaff ss
+  ON cc.TeacherID = ss.ID
+JOIN Users u
+  ON u.DCID = ss.Users_DCID
+INNER JOIN Sections sct 
+   ON cc.SectionId = sct.Id
+INNER JOIN Terms t 
+   ON sct.TermId = t.Id
+  AND sct.SchoolId = t.SchoolId
+INNER JOIN Terms yr
+   ON t.YearId*100 = yr.Id
+  AND yr.SchoolId = 0
+  AND yr.FirstDay <= SYSTIMESTAMP
+  AND yr.LastDay >= SYSTIMESTAMP
+  AND yr.IsyearRec = 1
+  AND MOD(yr.ID, 100) = 0
+
+ORDER BY s.Enroll_Status, s.Grade_Level, s.SchoolId, s.Student_Number,
+         cc.TermId, cc.Course_Number, cc.Section_Number
+		  ]]>
+    </sql>
+  </query>
 </queries>
