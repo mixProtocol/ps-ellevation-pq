@@ -5,4 +5,7 @@
   <permission name='/admin/home.html'>
       <implies allow="post">/ws/schema/query/com.gpsmxp.ellevation.exports.student_demographics</implies>
   </permission>
+  <permission name='/admin/home.html'>
+      <implies allow="post">/ws/schema/query/com.gpsmxp.ellevation.exports.student_schedules</implies>
+  </permission>
 </permission_mappings>
