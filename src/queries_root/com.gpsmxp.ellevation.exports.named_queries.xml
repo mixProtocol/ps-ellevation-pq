@@ -71,6 +71,7 @@ ORDER BY u.Last_Name, u.First_Name, ss.SchoolID
       <column column="Students.Student_Number">ImmigrantStatus</column>
       <column column="Students.Student_Number">LEP_EntryDate</column>
       <column column="Students.Student_Number">LEP_ExitDate</column>
+      <column column="Students.Student_Number">LEP_ScreenedOutDate</column>
     </columns>
     <sql>
 	    <![CDATA[				
@@ -100,7 +101,8 @@ SELECT
   msdx.Lep1stYrInUs AS Lep1stYrInUs,
   msdx.ImmigrantStatus AS ImmigrantStatus,
   udes.LEP_EntryDate AS LEP_EntryDate,
-  udes.LEP_ExitDate AS LEP_ExitDate
+  udes.LEP_ExitDate AS LEP_ExitDate,
+  udes.LEP_ScreenedOutDate AS LEP_ScreenedOutDate
 
 FROM Students s
 
