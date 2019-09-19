@@ -72,6 +72,7 @@ ORDER BY u.Last_Name, u.First_Name, ss.SchoolID
       <column column="Students.Student_Number">LEP_EntryDate</column>
       <column column="Students.Student_Number">LEP_ExitDate</column>
       <column column="Students.Student_Number">LEP_ScreenedOutDate</column>
+      <column column="Students.Student_Number">PHLOTE</column>
     </columns>
     <sql>
 	    <![CDATA[				
@@ -102,7 +103,8 @@ SELECT
   msdx.ImmigrantStatus AS ImmigrantStatus,
   udes.LEP_EntryDate AS LEP_EntryDate,
   udes.LEP_ExitDate AS LEP_ExitDate,
-  udes.LEP_ScreenedOutDate AS LEP_ScreenedOutDate
+  udes.LEP_ScreenedOutDate AS LEP_ScreenedOutDate,
+  scf.Phlote AS phlote
 
 FROM Students s
 
@@ -111,6 +113,9 @@ LEFT OUTER JOIN S_MA_Stu_Demographic_X msdx
 
 LEFT OUTER JOIN U_Def_Ext_Students udes
   ON s.Dcid = udes.StudentsDcid
+
+LEFT OUTER JOIN StudentCoreFields scf
+  ON s.Dcid = scf.StudentsDcid
 
 ORDER BY s.Enroll_Status, s.Grade_Level, 
   s.SchoolId, s.Student_Number
