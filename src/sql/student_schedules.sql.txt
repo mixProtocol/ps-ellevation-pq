@@ -13,7 +13,7 @@ SELECT
 FROM Students s
 
 JOIN CC cc
-  ON cc.StudentID=s.ID
+  ON s.ID = cc.StudentID
 JOIN Courses c
   ON UPPER(cc.Course_Number) = UPPER(c.Course_Number)
 JOIN SectionTeacher st

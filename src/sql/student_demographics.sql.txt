@@ -24,7 +24,13 @@ SELECT
   msdx.Lep1stYrInUs AS Lep1stYrInUs,
   msdx.ImmigrantStatus AS ImmigrantStatus,
   udes.LEP_EntryDate AS LEP_EntryDate,
-  udes.LEP_ExitDate AS LEP_ExitDate
+  udes.LEP_ExitDate AS LEP_ExitDate,
+  mssx.SPED3to5Placement AS SPED3to5Placement,
+  mssx.SPED6to21Placement AS SPED6to21Placement,
+  mssx.PrimaryDisability AS PrimaryDisability,
+  mssx.LevelOfNeed AS LevelOfNeed,
+  mssx.Sec504PlanStatus AS Sec504PlanStatus,
+  mssx.SPEDEvaluationResults AS SPEDEvaluationResults
 
 FROM Students s
 
@@ -33,6 +39,9 @@ LEFT OUTER JOIN S_MA_Stu_Demographic_X msdx
 
 LEFT OUTER JOIN U_Def_Ext_Students udes
   ON s.Dcid = udes.StudentsDcid
+
+LEFT OUTER JOIN S_MA_Stu_SPED_X mssx
+  ON s.Dcid = mssx.StudentsDcid
 
 ORDER BY s.Enroll_Status, s.Grade_Level, 
   s.SchoolId, s.Student_Number

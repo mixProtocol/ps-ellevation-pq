@@ -73,6 +73,12 @@ ORDER BY u.Last_Name, u.First_Name, ss.SchoolID
       <column column="Students.Student_Number">LEP_ExitDate</column>
       <column column="Students.Student_Number">LEP_ScreenedOutDate</column>
       <column column="Students.Student_Number">PHLOTE</column>
+      <column column="Students.Student_Number">SPED3to5Placement</column>
+      <column column="Students.Student_Number">SPED6to21Placement</column>
+      <column column="Students.Student_Number">PrimaryDisability</column>
+      <column column="Students.Student_Number">LevelOfNeed</column>
+      <column column="Students.Student_Number">Sec504PlanStatus</column>
+      <column column="Students.Student_Number">SPEDEvaluationResults</column>
     </columns>
     <sql>
 	    <![CDATA[				
@@ -103,8 +109,12 @@ SELECT
   msdx.ImmigrantStatus AS ImmigrantStatus,
   udes.LEP_EntryDate AS LEP_EntryDate,
   udes.LEP_ExitDate AS LEP_ExitDate,
-  udes.LEP_ScreenedOutDate AS LEP_ScreenedOutDate,
-  scf.Phlote AS phlote
+  mssx.SPED3to5Placement AS SPED3to5Placement,
+  mssx.SPED6to21Placement AS SPED6to21Placement,
+  mssx.PrimaryDisability AS PrimaryDisability,
+  mssx.LevelOfNeed AS LevelOfNeed,
+  mssx.Sec504PlanStatus AS Sec504PlanStatus,
+  mssx.SPEDEvaluationResults AS SPEDEvaluationResults
 
 FROM Students s
 
@@ -114,8 +124,8 @@ LEFT OUTER JOIN S_MA_Stu_Demographic_X msdx
 LEFT OUTER JOIN U_Def_Ext_Students udes
   ON s.Dcid = udes.StudentsDcid
 
-LEFT OUTER JOIN StudentCoreFields scf
-  ON s.Dcid = scf.StudentsDcid
+LEFT OUTER JOIN S_MA_Stu_SPED_X mssx
+  ON s.Dcid = mssx.StudentsDcid
 
 ORDER BY s.Enroll_Status, s.Grade_Level, 
   s.SchoolId, s.Student_Number
@@ -154,7 +164,7 @@ SELECT
 FROM Students s
 
 JOIN CC cc
-  ON cc.StudentID=s.ID
+  ON s.ID = cc.StudentID 
 JOIN Courses c
   ON UPPER(cc.Course_Number) = UPPER(c.Course_Number)
 JOIN SectionTeacher st
