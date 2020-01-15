@@ -10,14 +10,16 @@ SELECT
   cc.TermId AS TermId,
   cc.SchoolId AS SchoolId
 
-FROM CC cc
+FROM Students s
 
-JOIN Students s
+JOIN CC cc
   ON cc.StudentID=s.ID
 JOIN Courses c
-  ON  UPPER(cc.Course_Number) = UPPER(c.Course_Number)
+  ON UPPER(cc.Course_Number) = UPPER(c.Course_Number)
+JOIN SectionTeacher st
+  ON cc.sectionid = st.sectionid
 JOIN SchoolStaff ss
-  ON cc.TeacherID = ss.ID
+  ON st.Teacherid = ss.Id
 JOIN Users u
   ON u.DCID = ss.Users_DCID
 INNER JOIN Sections sct 
