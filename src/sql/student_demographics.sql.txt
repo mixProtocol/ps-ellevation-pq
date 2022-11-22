@@ -29,7 +29,9 @@ SELECT
   scf.Phlote AS Phlote,
   mssx.Sec504PlanStatus AS Sec504PlanStatus,
   CASE
-    WHEN mssx.SPED3to5Placement <> '00' AND  mssx.SPED3to5Placement <> '01' THEN '1'
+    WHEN mssx.SPED3to5Placement <> '00' 
+      AND mssx.SPED3to5Placement <> '01'
+      AND mssx.SPED3to5Placement <> '05' THEN '1'
     WHEN mssx.SPED6to21Placement <> '00' AND mssx.SPED6to21Placement <> '01' THEN '1'
     ELSE '0'
   END AS SPEDPlacement
