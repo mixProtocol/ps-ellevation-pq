@@ -3,7 +3,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         description="WPS ELLevation Ed PowerQueries (Watertown)"
         name="WPS ELLevation PowerQueries"
-        version="20221122.01"
+        version="20221122.02"
         xsi:schemaLocation="http://plugin.powerschool.pearson.com plugin.xsd">
 		
   <publisher name="George Skuse">
