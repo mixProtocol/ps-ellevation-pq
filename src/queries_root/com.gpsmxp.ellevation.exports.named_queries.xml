@@ -73,12 +73,8 @@ ORDER BY u.Last_Name, u.First_Name, ss.SchoolID
       <column column="Students.Student_Number">LEP_ExitDate</column>
       <column column="Students.Student_Number">LEP_ScreenedOutDate</column>
       <column column="Students.Student_Number">PHLOTE</column>
-      <column column="Students.Student_Number">SPED3to5Placement</column>
-      <column column="Students.Student_Number">SPED6to21Placement</column>
-      <column column="Students.Student_Number">PrimaryDisability</column>
-      <column column="Students.Student_Number">LevelOfNeed</column>
       <column column="Students.Student_Number">Sec504PlanStatus</column>
-      <column column="Students.Student_Number">SPEDEvaluationResults</column>
+      <column column="Students.Student_Number">SPEDPlacement</column>
     </columns>
     <sql>
 	    <![CDATA[				
