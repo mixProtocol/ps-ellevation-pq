@@ -27,12 +27,7 @@ SELECT
   udes.LEP_ExitDate AS LEP_ExitDate,
   udes.LEP_ScreenedOutDate AS LEP_ScreenedOutDate,
   scf.Phlote AS Phlote,
-  mssx.SPED3to5Placement AS SPED3to5Placement,
-  mssx.SPED6to21Placement AS SPED6to21Placement,
-  mssx.PrimaryDisability AS PrimaryDisability,
-  mssx.LevelOfNeed AS LevelOfNeed,
   mssx.Sec504PlanStatus AS Sec504PlanStatus,
-  mssx.SPEDEvaluationResults AS SPEDEvaluationResults,
   CASE
     WHEN mssx.SPED3to5Placement <> '00' AND  mssx.SPED3to5Placement <> '01' THEN '1'
     WHEN mssx.SPED6to21Placement <> '00' AND mssx.SPED6to21Placement <> '01' THEN '1'
